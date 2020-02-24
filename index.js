@@ -19,7 +19,9 @@ app.get("/ping", (request, response) => {
 });
 
 const userRoutes = require("./src/user/router");
+const eventRoutes = require("./src/events/router");
 
+app.use(eventRoutes);
 app.use(userRoutes);
 
 app.listen(port, () => {
