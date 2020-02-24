@@ -30,4 +30,39 @@ router.post("/signup", async (request, response) => {
   }
 });
 
+router.post("/login", async (request, response) => {
+  // console.log("request body", request.body);
+  try {
+    const user = await User.findOne({ where: { email: request.body.email } });
+
+    if (!user) {
+      response.status(400).send({
+        message: "User with that email does not exist"
+      });
+    }
+    const passwordValid = bcrypt.compareSync(
+      request.body.password,
+      user.password
+    );
+    if (passwordValid) {
+      const token = toJWT({ id: user.id });
+      return response.status(200).send({
+        token: token,
+        email: user.email,
+        username: user.username,
+        id: user.id
+      });
+    }
+    if (!passwordValid) {
+      response.status(400).send({
+        message: "Password was incorrect"
+      });
+    }
+  } catch (error) {
+    response.status(400).send({
+      message: `Error ${error.name}: ${error.message}`
+    });
+  }
+});
+
 module.exports = router;
