@@ -14,6 +14,16 @@ router.get("/event", async function(request, response, next) {
   }
 });
 
+router.get("/event/:id", async function(request, response, next) {
+  try {
+    const event = await Event.findByPk(request.params.id);
+    response.send(event);
+    console.log("done");
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.post("/event", auth, async (request, response) => {
   console.log("how my request looks?", request.user.dataValues.id);
   const newEvent = { ...request.body, userId: request.user.dataValues.id };
