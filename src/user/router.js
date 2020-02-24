@@ -1,6 +1,5 @@
 const { Router } = require("express");
 const router = new Router();
-
 const User = require("./model");
 const bcrypt = require("bcrypt");
 
@@ -30,3 +29,5 @@ router.post("/signup", async (request, response) => {
     }
   }
 });
+
+module.exports = router;
