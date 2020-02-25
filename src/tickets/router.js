@@ -1,12 +1,19 @@
 const { Router } = require("express");
 const auth = require("../auth/middleWare");
 const Ticket = require("./model");
-
+const Event = require("./model");
 const router = new Router();
 
-router.get("/ticket/", async function(request, response, next) {
+router.get("/ticket", async function(request, response, next) {
   try {
-    const tickets = await Ticket.findAll();
+    console.log("Boze what is my request?", request.body);
+    const eventId = request.body.eventId;
+
+    const tickets = await Ticket.findAll({
+      where: {
+        eventId: eventId
+      }
+    });
     response.send(tickets);
     console.log("done");
   } catch (error) {
