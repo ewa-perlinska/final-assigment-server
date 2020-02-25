@@ -10,7 +10,6 @@ const Ticket = sequelize.define("ticket", {
     type: Sequelize.INTEGER,
     allowNull: false
   },
-
   description: {
     type: Sequelize.STRING,
     allowNull: false
