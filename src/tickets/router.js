@@ -4,10 +4,10 @@ const Ticket = require("./model");
 const Event = require("./model");
 const router = new Router();
 
-router.get("/ticket", async function(request, response, next) {
+router.get("/events/:id/ticket", async function(request, response, next) {
   try {
     console.log("Boze what is my request?", request.body);
-    const eventId = request.body.eventId;
+    const eventId = request.params.id;
 
     const tickets = await Ticket.findAll({
       where: {
