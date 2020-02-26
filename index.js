@@ -21,10 +21,12 @@ app.get("/ping", (request, response) => {
 const userRoutes = require("./src/user/router");
 const eventRoutes = require("./src/events/router");
 const ticketRoutes = require("./src/tickets/router");
+const commentRoutes = require("./src/comments/router");
 
 app.use(eventRoutes);
 app.use(userRoutes);
 app.use(ticketRoutes);
+app.use(commentRoutes);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

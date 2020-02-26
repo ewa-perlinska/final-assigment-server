@@ -32,26 +32,6 @@ router.get("/ticket/:id", async function(request, response, next) {
   }
 });
 
-// router.get("/event/:id/ticket/:id", async function(request, response, next) {
-//   try {
-//     console.log("Jezu what is my request????????", request.body);
-//     const eventId = request.body.eventId;
-//     const ticketId = request.params.id;
-
-//     const tickets = await Ticket.findAll({
-//       where: {
-//         eventId: eventId,
-//         id: ticketId
-//       },
-//       include: [{ model: User }]
-//     });
-//     response.send(tickets);
-//     console.log("done");
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
 router.get("/event/:id/ticket/:id", async function(request, response, next) {
   try {
     const eventId = request.body.eventId;
@@ -68,7 +48,7 @@ router.get("/event/:id/ticket/:id", async function(request, response, next) {
   }
 });
 
-router.post("/ticket/:id", auth, async (request, response) => {
+router.post("/event/:id/ticket", auth, async (request, response) => {
   console.log("how my request looks???????", request.user.dataValues.id);
   console.log("how my request BODY LOOKS???????", request.body);
 
