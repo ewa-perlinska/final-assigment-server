@@ -26,6 +26,7 @@ router.get("/event/:id", async function(request, response, next) {
 
 router.post("/event", auth, async (request, response) => {
   console.log("how my request looks?", request.user.dataValues.id);
+  console.log("how my request looks?");
   const newEvent = { ...request.body, userId: request.user.dataValues.id };
   const event = await Event.create(newEvent);
   return response.status(201).send(event);
