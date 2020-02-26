@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const auth = require("../auth/middleWare");
 const Comment = require("./model");
+const User = require("../user/model");
 
 const router = new Router();
 
@@ -15,5 +16,27 @@ router.post(
     return response.status(201).send(comment);
   }
 );
+
+router.get("/event/:id/ticket/:id/comment", async function(
+  request,
+  response,
+  next
+) {
+  try {
+    console.log("whaaaaat is my request?????", request.body);
+    console.log("whaaaaat is request params", request.params);
+    const ticketId = request.params.id;
+    const comments = await Comment.findAll({
+      where: {
+        ticketId: ticketId
+      },
+      include: [{ model: User }]
+    });
+    response.send(comments);
+    console.log("done");
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;
