@@ -16,6 +16,7 @@ const Ticket = sequelize.define("ticket", {
     allowNull: false
   }
 });
+
 Ticket.belongsTo(User);
 User.hasMany(Ticket);
 
