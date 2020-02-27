@@ -61,4 +61,17 @@ router.post("/event/:id/ticket", auth, async (request, response) => {
   return response.status(201).send(ticket);
 });
 
+router.put("/ticket/:id", async function(request, response, next) {
+  try {
+    const ticket = await Ticket.findByPk(request.params.id);
+    if (ticket) {
+      return response.send(await ticket.update(request.body));
+    } else {
+      return response.status(404).send("Page not Found");
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
