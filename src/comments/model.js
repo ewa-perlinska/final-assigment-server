@@ -10,10 +10,4 @@ const Comment = sequelize.define("comment", {
   }
 });
 
-Comment.belongsTo(User);
-User.hasMany(Comment);
-
-Comment.belongsTo(Ticket);
-Ticket.hasMany(Comment);
-
 module.exports = Comment;
