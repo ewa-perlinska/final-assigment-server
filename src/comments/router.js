@@ -5,23 +5,15 @@ const User = require("../user/model");
 
 const router = new Router();
 
-router.post(
-  "/event/:id/ticket/:id/comment",
-  auth,
-  async (request, response) => {
-    console.log("COMENTS how my request looks?", request.user.dataValues.id);
-    console.log("crazy ! how my request BODY looks??????", request.body);
-    const newComment = { ...request.body, userId: request.user.dataValues.id };
-    const comment = await Comment.create(newComment);
-    return response.status(201).send(comment);
-  }
-);
+router.post("/ticket/:id/comment", auth, async (request, response) => {
+  console.log("COMENTS how my request looks?", request.user.dataValues.id);
+  console.log("crazy ! how my request BODY looks??????", request.body);
+  const newComment = { ...request.body, userId: request.user.dataValues.id };
+  const comment = await Comment.create(newComment);
+  return response.status(201).send(comment);
+});
 
-router.get("/event/:id/ticket/:id/comment", async function(
-  request,
-  response,
-  next
-) {
+router.get("/ticket/:id/comment", async function(request, response, next) {
   try {
     console.log("whaaaaat is my request?????", request.body);
     console.log("whaaaaat is request params", request.params);
